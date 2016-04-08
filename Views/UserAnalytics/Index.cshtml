@@ -1,0 +1,90 @@
+﻿@{
+    ViewBag.Title = "Index";
+}
+<h2>Number of Hits to this site by Browser</h2>
+<div id='dashboard'>
+</div>
+<script>    
+    function callback(data) {
+        //console.log(data);
+        var items = data.rows;
+        var fData = [];
+        var fd = [];
+        fd["IE"] = 0;
+        fd["Chrome"] = 0;
+        fd["Mozilla"] = 0;
+        fd["Other"] = 0;
+        var fSt = [];
+        fSt["State"] = "1";
+        var temp = "1";
+        for (var i = 0; i < items.length; i++) {
+
+            if (items[i].date != temp && temp != "1") {
+                fSt["freq"] = fd;
+                fData.push(fSt);
+                var fSt = [];
+                fSt["State"] = items[i].date;
+                var fd = [];
+                fd["IE"] = 0;
+                fd["Chrome"] = 0;
+                fd["Mozilla"] = 0;
+                fd["Other"] = 0;
+            }
+            fSt["State"] = items[i].date;
+            temp = items[i].date;
+            if (items[i].browserType == 'Chrome')
+                fd["Chrome"] = parseInt(items[i].visits);
+            else if (items[i].browserType == 'IE')
+                fd["IE"] = parseInt(items[i].visits);
+            else if (items[i].browserType == 'Other')
+                fd["Other"] = parseInt(items[i].visits);
+            else if (items[i].browserType == 'Firefox')
+                fd["Mozilla"] = parseInt(items[i].pageViews);
+        }
+        fSt["freq"] = fd;
+        fData.push(fSt);
+        //console.log(fData);
+        dashboard('#dashboard', fData);
+    }
+    $(document).ready(function () {
+        //console.log(freqData);
+        var queryStr = "http://cdtsapp413d/api.php?owa_apiKey=cb271f363a53e37b73a82bfe55c6a630&owa_do=getResultSet&owa_metrics=visitDuration,bounces,repeatVisitors,newVisitors,visits,pageViews&owa_dimensions=date,browserType&owa_startDate=20100312&owa_endDate=20170228&owa_siteId=5889ba6cd65848bd51538bed1644929f&owa_format=jsonp";
+        jQuery.ajax({
+            url: queryStr,
+            method: "GET",
+            dataType: "jsonp",
+            crossDomain: true,
+            contentType: "application/json",
+            headers: {
+                'Access-Control-Allow-Origin': "*"
+            },
+            success: function (data) {
+                console.log(data);
+
+            },
+            error: function (error) {
+                //console.log(error);
+            }
+        });
+		jQuery.ajax({
+            url: "http://cdtsapp413d/customActionDataApi.php",
+            method: "GET",
+            dataType: "jsonp",
+            crossDomain: true,
+            contentType: "application/json",
+            headers: {
+                'Access-Control-Allow-Origin': "*"
+            },
+            success: function (data) {
+                console.log(data);
+
+            },
+            error: function (error) {
+                //console.log(error);
+            }
+        });
+		
+    });
+
+
+</script>

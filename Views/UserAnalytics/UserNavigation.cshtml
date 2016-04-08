@@ -1,0 +1,110 @@
+﻿@{
+    ViewBag.Title = "UserNavigation";
+}
+
+<div id="main">
+    <div id="sequence"></div>
+    <div id="chart">
+        <div id="explanation" style="visibility: hidden;">
+            <span id="percentage"></span><br />
+            of visits begin with this sequence of pages
+        </div>
+    </div>
+</div>
+<script src="//d3js.org/d3.v3.min.js"></script>
+<script src="~/Scripts/UserNavSequence.js"></script>
+
+<style>
+    #main {
+  float: left;
+  width: 500px;
+}
+
+#sidebar {
+  float: right;
+  width: 500px;
+}
+
+/*#sequence {
+  width: 500px;
+  height: 70px;
+}
+
+
+#sequence text {
+  font-family: 'Open Sans', sans-serif;
+  font-size: 13px;
+  font-weight: 600;
+  fill: #fff;
+}*/
+
+#chart {
+  position: relative;
+}
+
+#chart path {
+  stroke: #fff;
+}
+
+#barchart {
+  position: absolute;
+  top: 260px;
+  left: 750px;
+  width: 300px;
+  text-align: center;
+  color: #666;
+  z-index: -1;
+}
+
+
+#barchart rect {
+  fill: steelblue;
+}
+
+#Barchart text {
+  fill: white;
+  font: 10px sans-serif;
+  text-anchor: middle;
+}
+
+#sidebar {
+  float: right;
+  width: 100px;
+}
+
+#sequence {
+  width: 600px;
+  height: 70px;
+}
+
+#legend {
+  padding: 10px 0 0 3px;
+}
+
+#sequence text, #legend text {
+  font-weight: 600;
+  fill: #fff;
+}
+
+#chart {
+  position: relative;
+}
+
+#chart path {
+  stroke: #fff;
+}
+
+#explanation {
+  position: absolute;
+  top: 260px;
+  left: 370px;
+  width: 140px;
+  text-align: center;
+  color: #666;
+  z-index: 100;
+}
+
+#percentage {
+  font-size: 2.5em;
+}
+</style>

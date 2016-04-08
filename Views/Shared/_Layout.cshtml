@@ -1,0 +1,89 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8" />
+        <title>@ViewBag.Title - My ASP.NET MVC Application</title>
+        <link href="~/favicon.ico" rel="shortcut icon" type="image/x-icon" />
+        <meta name="viewport" content="width=device-width" />
+        @Styles.Render("~/Content/css")
+        @Scripts.Render("~/bundles/modernizr")
+        @Scripts.Render("~/bundles/jquery")
+        @RenderSection("scripts", required: false)
+        <script src="http://d3js.org/d3.v3.min.js"></script>
+        <link rel="stylesheet" type="text/css"
+              href="https://fonts.googleapis.com/css?family=Open+Sans:400,600">
+        <link href="~/Content/sequences.css" rel="stylesheet" />
+        <script src="~/Scripts/sequences.js"></script>
+        @*<script src="~/Scripts/jsonData.js"></script>*@
+        
+		
+        
+    </head>
+    <body>
+        <header>
+            <div class="content-wrapper">
+                <div class="float-left">
+                    <p class="site-title">@Html.ActionLink("your logo here", "Index", "Home")</p>
+                </div>
+                <div class="float-right">
+                    <section id="login">
+                        @Html.Partial("_LoginPartial")
+                    </section>
+                    <nav>
+                        <ul id="menu">
+                            <li>@Html.ActionLink("Home", "Index", "Home")</li>
+                            <li>@Html.ActionLink("User Analytics with Browser", "Index", "UserAnalytics")</li>
+                            <li>@Html.ActionLink("User Analytics with Navigation", "UserNavigation", "UserAnalytics")</li>
+                            <li>@Html.ActionLink("About", "About", "Home")</li>
+                            <li>@Html.ActionLink("Contact", "Contact", "Home")</li>
+							<li><button onclick="actionTrackerOne()">Click Navigation</button></li>
+                            <li><button onclick="actionTrackerTwo()">Click Widget</button></li>
+                        </ul>
+                    </nav>
+                </div>
+            </div>
+        </header>
+        <div id="body">
+            @RenderSection("featured", required: false)
+            <section class="content-wrapper main-content clear-fix">
+                @RenderBody()
+            </section>
+        </div>
+        <footer>
+            <div class="content-wrapper">
+                <div class="float-left">
+                    <p>&copy; @DateTime.Now.Year - My ASP.NET MVC Application</p>
+                </div>
+            </div>
+        </footer>
+<!-- Start Open Web Analytics Tracker -->
+<!-- Start Open Web Analytics Tracker -->
+<script type="text/javascript">
+//<![CDATA[
+var owa_baseUrl = 'http://cdtsapp413d/';
+var owa_cmds = owa_cmds || [];
+owa_cmds.push(['setSiteId', '5889ba6cd65848bd51538bed1644929f']);
+owa_cmds.push(['trackPageView']);
+owa_cmds.push(['trackClicks']);
+owa_cmds.push(['trackDomStream']);
+
+(function() {
+	var _owa = document.createElement('script'); _owa.type = 'text/javascript'; _owa.async = true;
+	owa_baseUrl = ('https:' == document.location.protocol ? window.owa_baseSecUrl || owa_baseUrl.replace(/http:/, 'https:') : owa_baseUrl );
+	_owa.src = owa_baseUrl + 'modules/base/js/owa.tracker-combined-min.js';
+	var _owa_s = document.getElementsByTagName('script')[0]; _owa_s.parentNode.insertBefore(_owa, _owa_s);
+}());
+//]]>
+var actionTrackerOne = function(){
+		OWATracker.trackAction('Cooking', 'One',  'Best Chicken Parmesan', 10);
+}
+var actionTrackerTwo = function(){
+		OWATracker.trackAction('Fishing', 'Two',  'Best Chicken Parmesan Recipe', 10);
+}
+</script>
+<!-- End Open Web Analytics Code -->
+		
+		
+        
+    </body>
+</html>
